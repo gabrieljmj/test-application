@@ -1,33 +1,27 @@
 <?php
     namespace Application\Entity;
-
+    
+    use Application\Entity\User;
+    
     class UserTests extends \PHPUnit_Framework_TestCase{
         public function assertPreConditions(){
-            $userEntityClass = 'Application\Entity\User';
             $this->assertTrue(
-                class_exists( $userEntityClass ), 'Class not found: ' . $userEntityClass
+                class_exists( 'Application\Entity\User' ),
+                'Class not found: "Application\Entity\User"'
             );
         }
-
+        
         /*
-         * @expectedException \InvalidArgumentException
-         * @expectedExceptionMessage 'aname' must be a string
+         * @exceptedException \InvalidArgumentException
         */
-        public function testShouldExistsSetterForName(){
+        public function testSetterForName(){
+            $this->assertTrue( method_exists( new User, 'setName' ), 'Method not found: "setName"' );
+            
+            $name = 'Gabriel';
             $instance = new User;
-            $return = $instance->setName( 1 );
-            
-            $this->assertEquals(
-                $instance,
-                $return,
-                'Return must be an instance of User'
-            );
-            
-            $this->assertAttributeEquals(
-                'User\'s name',
-                'name',
-                $instance,
-                'Attribute '
-            );
+            $setName = $instance->setName( $name );
+        
+            $this->assertEquals( $setName, $instance, 'Method "setName" must return an instance od User' );
+            $this->assertAttributeEquals( $name, 'name', $instance, 'Attribute was not correctly set' );
         }
     }
