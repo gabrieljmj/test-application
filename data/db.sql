@@ -1,0 +1,14 @@
+CREATE DATABASE IF NOT EXISTS `test_application`;
+
+USE `test_application`;
+
+CREATE TABLE IF NOT EXISTS `users` (
+    `id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255),
+    `email` VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS `posts` (
+    `id` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `user_id` INTEGER(11)
+);
