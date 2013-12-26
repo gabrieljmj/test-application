@@ -8,4 +8,20 @@
         die( 'Install composer' );
     }
 
-    require $composer_autoload;
+    require_once $composer_autoload;
+    
+    use Doctrine\ORM\Tools\Setup;
+    use Doctrine\ORM\EntityManager;
+     
+    $entities = array( 'src/', 'tests/' );
+    $isDevMode = true;
+     
+    $dbParams = array(
+        'driver'   => 'pdo_mysql',
+        'user'     => 'root',
+        'password' => '',
+        'dbname'   => 'test_application',
+    );
+
+    $config = Setup::createAnnotationMetadataConfiguration( $entities, $isDevMode );
+    $entityManager = EntityManager::create( $dbParams, $config );
